@@ -1,0 +1,93 @@
+<html>
+<head>
+<title>jCarousel Examples</title>
+<link href="../style.css" rel="stylesheet" type="text/css" />
+<!--
+  jQuery library
+-->
+<script type="text/javascript" src="lib/jquery-1.4.2.min.js"></script>
+<!--
+  jCarousel library
+-->
+<script type="text/javascript" src="lib/jquery.jcarousel.js"></script>
+<!--
+  jCarousel skin stylesheet
+-->
+<link rel="stylesheet" type="text/css" href="skins/tango/skin.css" />
+
+<script type="text/javascript">
+
+jQuery(document).ready(function() {
+
+    jQuery('#mycarousel').jcarousel({
+    	wrap: 'circular',
+        visible:3,
+        auto: 2,
+        scroll: 1,
+        itemFirstInCallback : itemFirstInCallbackFunction
+    });    
+    
+    $('.jcarousel-prev-horizontal').hide();
+    $('.jcarousel-next-horizontal').hide();
+    
+    $('#wrap').mouseover(function() { 
+    
+        var img_width = $("ul#mycarousel li img").width(); 
+        var img_height = $("ul#mycarousel li img").height(); 
+        var next = $('.jcarousel-next-horizontal');
+        var prev = $('.jcarousel-prev-horizontal');
+
+        prev.css('left',(img_width - 40));
+        next.css('left',(img_width + img_width - 20) );        
+        
+        prev.css('top',(img_height/3));
+        next.css('top',(img_height/3) );          
+        
+        $('.jcarousel-prev-horizontal').show();
+        $('.jcarousel-next-horizontal').show();
+    });
+        
+    $('#wrap').mouseout(function() {
+        $('.jcarousel-prev-horizontal').hide();
+        $('.jcarousel-next-horizontal').hide();
+    });
+        
+});
+
+
+function itemFirstInCallbackFunction(carousel,object,index, state)
+{
+    
+    $(window).resize(function(){
+        
+        $("ul#mycarousel li").css('opacity','0.1');    
+        x=index+1;
+        $("ul#mycarousel .jcarousel-item-" + x).css('opacity','1');        
+        
+    });
+    
+    $("ul#mycarousel li").css('opacity','0.1');    
+    x=index+1;
+    $("ul#mycarousel .jcarousel-item-" + x).css('opacity','1');
+        
+}
+
+</script>
+	
+</head>
+<body>
+
+<div id="jcarousel-content">
+    <div id="wrap" >
+        <ul id="mycarousel" class="jcarousel-skin-tango" >
+            <li><img src="images/1.jpg" style="width:100%;height: 100%;"  alt="" /></li>
+            <li><img src="images/2.jpg" style="width:100%;height: 100%;"  alt="" /></li>
+            <li><img src="images/3.jpg" style="width:100%;height: 100%;"  alt="" /></li>
+            <li><img src="images/4.jpg" style="width:100%;height: 100%;"  alt="" /></li>
+            <li><img src="images/5.jpg" style="width:100%;height: 100%;"  alt="" /></li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
